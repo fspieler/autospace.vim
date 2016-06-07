@@ -4,11 +4,9 @@ function! AdjustIndentationSpaces(num_spaces)
     let &l:shiftwidth=a:num_spaces
 endfunction
 
-function! DetectLeadingSpaces()
+function! AdjustLeadingSpaces()
     let l:numspaces=system("egrep -o \"^\\s+\" " . @% . "| awk '{print length ($0); }' | sort -nu | head -n 1")
     if l:numspaces != 0
         call AdjustIndentationSpaces(l:numspaces)
     endif
 endfunction
-
-call DetectLeadingSpaces()
